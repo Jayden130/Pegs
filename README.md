@@ -7,6 +7,7 @@ The board is a 4x6 grid and each opponent starts with 8 pegs.
 ![image](https://github.com/user-attachments/assets/e9edc669-8991-4958-a794-e2b397cdb228)
 
 # Pegs gameplay rules
+White always begins first.
 
 - **Move rules**
   - A peg can move up, left and right freely, as long as there is nothing in the way, like a wall or other peg.
