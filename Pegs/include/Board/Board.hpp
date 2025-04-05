@@ -17,8 +17,6 @@ public:
 	uint64_t bitboards[3] = {0, 0, 0};
 
 	std::vector<uint64_t> repetitionPositionHistory;
-	int twentymoveCounter = 0; // WARNING: May be inaccurate when undoing moves
-
 
 	void MakeMove(Move move);
 	void UndoMove(Move move);

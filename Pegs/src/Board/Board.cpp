@@ -11,7 +11,6 @@ Board::Board(Board& board)
 		bitboards[i] = board.bitboards[i];
 	}
 	turn = board.turn;
-	twentymoveCounter = board.twentymoveCounter;
 	zobristKey = board.zobristKey;
 	repetitionPositionHistory = board.repetitionPositionHistory;
 }
@@ -56,7 +55,7 @@ Board::Board(std::string fen)
 			bitboards[2] |= 1ull << (row * 4 + column);
 			column++;
 			continue;
-		
+
 		default:
 			if (isdigit(symbol))
 			{
@@ -99,23 +98,19 @@ void Board::MakeMove(Move move)
 			zobristKey ^= Zobrist::GetPiecesArray()[0][captureSquare];
 		}
 	}
-	
+
 	zobristKey ^= Zobrist::GetPiecesArray()[turn == Piece::white ? 0 : 1][startSquare];
 	zobristKey ^= Zobrist::GetPiecesArray()[turn == Piece::white ? 0 : 1][targetSquare];
 
-	if (captureSquare || direction > 2 || direction < -2)
+	Turn();
+
+	if (captureSquare != 0 || direction > 2 || direction < -2)
 	{
 		repetitionPositionHistory.clear();
-		twentymoveCounter = 0;
 	}
-	else
-	{
-		repetitionPositionHistory.emplace_back(zobristKey);
-		twentymoveCounter++;
-	}
+	repetitionPositionHistory.emplace_back(zobristKey);
 
 	bitboards[2] = bitboards[0] | bitboards[1];
-	Turn();
 }
 
 void Board::UndoMove(Move move)
@@ -182,10 +177,6 @@ GameResult Board::GetGameResult()
 	// check for repetition
 	int repCount = std::count(repetitionPositionHistory.begin(), repetitionPositionHistory.end(), zobristKey);
 	if (repCount >= 3)
-		return GameResult::draw;
-
-	// check for 20 move rule
-	if (twentymoveCounter >= 20)
 		return GameResult::draw;
 
 	return GameResult::inProgress;
