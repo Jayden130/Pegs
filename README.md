@@ -8,4 +8,13 @@ The board is a 4x6 grid and each opponent starts with 8 pegs.
 
 # Pegs gameplay rules
 
-# 
+- **Move rules**
+  - A peg can move up, left and right freely, as long as there is nothing in the way, like a wall or other peg.
+  - A peg can 'skip' if a peg of any color is in front of it. A skipping move is where you move up-left or up-right from the starting position.
+  - A peg can capture a peg of the opponent by jumping over it diagonally. This can be in any of the four possible directions.
+
+- **Ending the game**
+  - The game has ended when a player gets a peg to the other side of the board. That player wins.
+  - The game is a draw if the same position is repeated thrice, or if a player has no moves.
+
+# How do i start?
