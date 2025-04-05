@@ -19,4 +19,4 @@ White always begins first.
   - The game has ended when a player gets a peg to the other side of the board. That player wins.
   - The game is a draw if the same position is repeated thrice, or if a player has no moves.
 
-# How do I Start?
+# How to Start
