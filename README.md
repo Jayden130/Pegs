@@ -7,7 +7,7 @@ The board is a 4x6 grid and each opponent starts with 8 pegs.
 
 ![image](https://github.com/user-attachments/assets/e9edc669-8991-4958-a794-e2b397cdb228)
 
-# Pegs gameplay rules
+# Gameplay Rules
 White always begins first.
 
 - **Move rules**
@@ -19,4 +19,4 @@ White always begins first.
   - The game has ended when a player gets a peg to the other side of the board. That player wins.
   - The game is a draw if the same position is repeated thrice, or if a player has no moves.
 
-# How do i start?
+# How do I Start?
