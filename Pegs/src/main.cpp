@@ -1,4 +1,8 @@
 #include <iostream>
+#include <thread>
+
+#include <SFML/Graphics.hpp>
+
 #include "Board/Board.hpp"
 
 #include "Core/Timer.hpp"
@@ -6,10 +10,13 @@
 #include "My Bot/MyBot.hpp"
 #include "Human Bot/HumanBot.hpp"
 
+#include "Core/Renderer.hpp"
 #include "Core/GameController.hpp"
 
 int main()
 {
+    std::thread renderer(Renderer::main);
+
     std::cout << "Fen: ";
     std::string fen;
     std::getline(std::cin, fen);
