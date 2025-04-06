@@ -56,6 +56,9 @@
     <ClCompile Include="src\My Bot\MyBot.cpp">
       <Filter>Source Files\Bot</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Board\Board.hpp">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="include\My Bot\MyBot.hpp">
       <Filter>Header Files\Bot</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Renderer.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
