@@ -61,6 +61,7 @@ White always begins first.
 | uint64_t\[3] | bitboards | array of 64-bit numbers where each bit set to 1 represents a square that contains a peg of the given color. 0 = white bitboard, 1 = black bitboard, 2 = all pieces bitboard. |
 | vector\<uint64_t> | repetitionPositionHistory | Zobrist keys for all the positions played in the game so far. This is reset whenever a push move, skipping move or capture move is made, as previous positions are now impossible to reach again. |
 
+
 ## Move (struct)
 | Type | Definition | Notes |
 | --- | --- | --- |
@@ -71,7 +72,8 @@ White always begins first.
 | int | GetTargetSquare() | Returns the target square of the move. |
 | int | GetCapture() | Returns the capture square of the move. |
 | int | GetDirection() | Returns the offset of the starting square and the target square. |
-| bool | IsEmpty() | Returns true if the moveValue is 0. |
+| bool | IsEmpty() | Returns true if the moveValue is 0, otherwise false. |
+
 
 ## Piece (enum)
 | Type | Definition | Notes |
@@ -80,4 +82,45 @@ White always begins first.
 | none | black | Value of 0. Represents no piece. |
 | white | black | Value of 1. Represents a white piece. |
 
+
+## Timer (class)
+| Type | Definition | Notes |
+| --- | --- | --- |
+| long long | GetGameStartTimeMiliseconds() | The amount of time (in milliseconds) that each player started the game with. |
+| long long | GetMilisecondsElapsedThisTurn() | The amount of time elapsed since the current player started thinking (in milliseconds). |
+| long long | GetMilisecondsRemaining() | The amount of time left on the clock for the current player (in milliseconds). |
+| long long | GetOpponentMilisecondsRemaining() | The amount of time left on the clock for the other player (in milliseconds). |
+
+
+## BoardHelper
+| Type | Definition | Notes |
+| --- | --- | --- |
+| const int | Infinity | ~32-bit integer limit: 2147000000. |
+| constexpr uint64_t | FileA | Bits of the first file. |
+| constexpr uint64_t | FileB | Bits of the second file. |
+| constexpr uint64_t | FileC | Bits of the third file. |
+| constexpr uint64_t | FileD | Bits of the fourth file. |
+| constexpr uint64_t | Rank1 | Bits of the first rank. |
+| constexpr uint64_t | Rank2 | Bits of the second rank. |
+| constexpr uint64_t | Rank3 | Bits of the third rank. |
+| constexpr uint64_t | Rank4 | Bits of the fourth rank. |
+| constexpr uint64_t | Rank5 | Bits of the fifth rank. |
+| constexpr uint64_t | Rank6 | Bits of the sixth rank. |
+| constexpr uint64_t | notAFile | All bits, except the A file. |
+| constexpr uint64_t | notDFile | All bits, except the D file. |
+| constexpr uint64_t | innerFileMask | All bits, except the A and D file. |
+| constexpr uint64_t | outerFileMask | All bits, except the B and C file. |
+| constexpr uint64_t | LightSquares | Bits of the white squares. |
+| constexpr uint64_t | DarkSquares | Bits of the black squares. |
+| int | PopLSB(uint64_t& value) | Returns index of the first bit that is set to 1. The bit will also be cleared to zero. This can be useful for iterating over all the set squares in a bitboard. |
+| int | GetLSB(uint64_t& value) | Returns index of the first bit that is set to 1. |
+| int | CountBits(uint64_t value) | Returns the number of bits that set to 1 in the given bitboard. |
+| void | SetSquare(uint64_t& bitboard, int squareIndex) | Set the given square on the bitboard to 1. |
+| void | ClearSquare(uint64_t& bitboard, int squareIndex) | Clear the given square on the bitboard to 0. |
+| void | ToggleSquares(uint64_t& bitboard, int squareA, int squareB) | Toggle the given two squares on the bitboard between 0 and 1. This can be useful when making a move. |
+| bool | SquareIsSet(uint64_t bitboard, int squareIndex) | Returns true if the given square is set to 1 on the bitboard, otherwise false. |
+| bool | ValidSquare(int x, int y) | Returns true if given x and y is not out of bounds, otherwise false. |
+| bool | ValidSquare(int x, int y, int& index) | Returns true if given x and y is not out of bounds, otherwise false. Also outputs the index of the square on x and y |
+| int | FileIndex(int squareIndex) | Returns the file of the given square index. Starts at 1. |
+| int | RankIndex(int squareIndex) | Returns the rank of the given square index. Starts at 1. |
 
