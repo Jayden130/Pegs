@@ -145,6 +145,7 @@ bool GameController::IsLegalMove(Move move, Board& board)
 
 std::string GameController::ToNotation(int startSquare, int targetSquare, int captureSquare)
 {
+    constexpr char fileSuffix[4] = { 'a', 'b', 'c', 'd' };
     std::string algebraic = fileSuffix[FileIndex(startSquare) - 1] + std::to_string(RankIndex(startSquare))
         + fileSuffix[FileIndex(targetSquare) - 1] + std::to_string(RankIndex(targetSquare));
     if (captureSquare != 0) algebraic += "+";

@@ -24,8 +24,6 @@ constexpr uint64_t outerFileMask = ~innerFileMask;
 constexpr uint64_t LightSquares = 0x555555;
 constexpr uint64_t DarkSquares = 0xAAAAAA;
 
-constexpr char fileSuffix[4] = { 'a', 'b', 'c', 'd' };
-
 int PopLSB(uint64_t& value);
 int GetLSB(uint64_t& value);
 int CountBits(uint64_t value);
