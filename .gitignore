@@ -1,5 +1,8 @@
 *.vsidx
 *.ipch
+.vs*
+
+*Debug*
 
 # Prerequisites
 *.d
