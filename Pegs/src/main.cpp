@@ -3,6 +3,7 @@
 
 #include "Core/Timer.hpp"
 
+#include "My Bot/MyBot.hpp"
 #include "Human Bot/HumanBot.hpp"
 
 #include "Core/GameController.hpp"
@@ -18,7 +19,7 @@ int main()
         fen = "w wwww/wwww/4/4/bbbb/bbbb";
     }
     Board board(fen);
-
+    
     HumanBot whiteBot;
     HumanBot blackBot;
 

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Board">
+      <UniqueIdentifier>{37d3e92c-630a-4bb5-af2e-b347daec88f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Board">
+      <UniqueIdentifier>{7196ecbc-5707-4125-a1c5-74401dd1c66b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{bc519599-3987-4a0f-adf8-c6ce504ae20b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{7618b582-0db3-40e1-a34e-53c073a1d9dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bot">
+      <UniqueIdentifier>{3f0b8cf7-9ba3-427e-9c90-7075f84627ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Bot">
+      <UniqueIdentifier>{a83dc4e8-9ac3-484b-adca-959f776b0276}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Board\Board.cpp">
+      <Filter>Source Files\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board\BoardHelper.cpp">
+      <Filter>Source Files\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Timer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\GameController.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Clock.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board\Zobrist.cpp">
+      <Filter>Source Files\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Human Bot\HumanBot.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\My Bot\MyBot.cpp">
+      <Filter>Source Files\Bot</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Board\Board.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\Move.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\Piece.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\GameResult.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\IBot.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\BoardHelper.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Timer.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\GameController.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\Clock.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\Zobrist.hpp">
+      <Filter>Header Files\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Human Bot\HumanBot.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\My Bot\MyBot.hpp">
+      <Filter>Header Files\Bot</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

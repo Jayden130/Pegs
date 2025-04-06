@@ -55,7 +55,7 @@ Board::Board(std::string fen)
 			bitboards[2] |= 1ull << (row * 4 + column);
 			column++;
 			continue;
-
+		
 		default:
 			if (isdigit(symbol))
 			{
@@ -98,7 +98,7 @@ void Board::MakeMove(Move move)
 			zobristKey ^= Zobrist::GetPiecesArray()[0][captureSquare];
 		}
 	}
-
+	
 	zobristKey ^= Zobrist::GetPiecesArray()[turn == Piece::white ? 0 : 1][startSquare];
 	zobristKey ^= Zobrist::GetPiecesArray()[turn == Piece::white ? 0 : 1][targetSquare];
 
