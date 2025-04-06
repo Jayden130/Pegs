@@ -61,6 +61,7 @@ White always begins first.
 | uint64_t\[3] | bitboards | array of 64-bit numbers where each bit set to 1 represents a square that contains a peg of the given color. 0 = white bitboard, 1 = black bitboard, 2 = all pieces bitboard. |
 | vector\<uint64_t> | repetitionPositionHistory | Zobrist keys for all the positions played in the game so far. This is reset whenever a push move, skipping move or capture move is made, as previous positions are now impossible to reach again. |
 
+
 ## Move (struct)
 | Type | Definition | Notes |
 | --- | --- | --- |
@@ -73,6 +74,7 @@ White always begins first.
 | int | GetDirection() | Returns the offset of the starting square and the target square. |
 | bool | IsEmpty() | Returns true if the moveValue is 0, otherwise false. |
 
+
 ## Piece (enum)
 | Type | Definition | Notes |
 | --- | --- | --- |
@@ -80,13 +82,15 @@ White always begins first.
 | none | black | Value of 0. Represents no piece. |
 | white | black | Value of 1. Represents a white piece. |
 
+
 ## Timer (class)
 | Type | Definition | Notes |
 | --- | --- | --- |
 | long long | GetGameStartTimeMiliseconds() | The amount of time (in milliseconds) that each player started the game with. |
-| long long GetMilisecondsElapsedThisTurn() | The amount of time elapsed since the current player started thinking (in milliseconds). |
-| long long GetMilisecondsRemaining() | The amount of time left on the clock for the current player (in milliseconds). |
-| long long GetOpponentMilisecondsRemaining() | The amount of time left on the clock for the other player (in milliseconds). |
+| long long | GetMilisecondsElapsedThisTurn() | The amount of time elapsed since the current player started thinking (in milliseconds). |
+| long long | GetMilisecondsRemaining() | The amount of time left on the clock for the current player (in milliseconds). |
+| long long | GetOpponentMilisecondsRemaining() | The amount of time left on the clock for the other player (in milliseconds). |
+
 
 ## BoardHelper
 | Type | Definition | Notes |
