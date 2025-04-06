@@ -19,4 +19,7 @@ White always begins first.
   - The game has ended when a player gets a peg to the other side of the board. That player wins.
   - The game is a draw if the same position is repeated thrice, or if a player has no moves.
 
-# How to Start
+# Getting Started
+- Install an IDE, such as [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+- Install Microsoft Visual Studio C++ on your IDE.
+- Download this repository and open the project.
