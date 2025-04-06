@@ -83,6 +83,16 @@ White always begins first.
 | white | black | Value of 1. Represents a white piece. |
 
 
+## GameResult (enum)
+| Type | Definition | Notes |
+| --- | --- | --- |
+| GameResult | inProgress | The game is still going. |
+| GameResult | inconclusive | The game is inconclusive. |
+| GameResult | draw | The game is a draw. Neither side wins. |
+| GameResult | whiteWin | White wins. |
+| GameResult | blackWin | Black wins. |
+
+
 ## Timer (class)
 | Type | Definition | Notes |
 | --- | --- | --- |
