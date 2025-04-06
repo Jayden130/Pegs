@@ -1,3 +1,6 @@
+*.vsidx
+*.ipch
+
 # Prerequisites
 *.d
 
