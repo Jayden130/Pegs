@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include "Core/Timer.hpp"
 
 class Clock
 {
@@ -15,7 +16,8 @@ public:
 	long long WhiteMillisecondsRemaining = 0;
 	long long BlackMillisecondsRemaining = 0;
 
-private:
 	bool isWhiteToMove = true;
+
+private:
 	std::chrono::steady_clock::time_point TimeAtStartOfTurn;
 };

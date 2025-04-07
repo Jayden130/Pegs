@@ -16,10 +16,22 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.ipch
+*.suo
+*.vsidx
+*.idb
+*.pdb
+*.ilk
 
 # Compiled Dynamic libraries
 *.so
 *.dylib
+*.db
+*.json
+*.tlog
+*.log
+*.user
+*.recipe
 
 # Fortran module files
 *.mod
@@ -35,3 +47,4 @@
 *.exe
 *.out
 *.app
+
