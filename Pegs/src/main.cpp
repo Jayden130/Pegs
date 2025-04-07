@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Board/Board.hpp"
 
+#include "Board/Board.hpp"
 #include "Core/Timer.hpp"
 
 #include "My Bot/MyBot.hpp"
@@ -20,8 +20,8 @@ int main()
     }
     Board board(fen);
     
-    HumanBot whiteBot;
-    HumanBot blackBot;
+    MyBot whiteBot;
+    MyBot blackBot;
 
     GameController controller;
 

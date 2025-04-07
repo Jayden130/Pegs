@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Board/Board.hpp"
+#include "Core/Timer.hpp"
+
 class IBot
 {
 public:
