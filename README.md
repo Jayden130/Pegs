@@ -2,8 +2,8 @@
 This library contains all necessary components to make a Pegs bot.
 
 # What is Pegs?
-Pegs is a 2 player game similar to Chess and Checkers. The goal is to get one of your Pegs to the other side of the board.
-The board is a 4x6 grid and each opponent starts with 8 pegs.
+Pegs is a turn based 2 player game similar to Chess and Checkers. The goal is to get one of your Pegs to the other side of the board.
+The board is a 4x6 grid and each opponent starts with 8 pegs. After white has made a move, black gets to make a move, etc.
 
 ![image](https://github.com/user-attachments/assets/e9edc669-8991-4958-a794-e2b397cdb228)
 
@@ -81,6 +81,16 @@ White always begins first.
 | Piece | black | Value of -1. Represents a black piece. |
 | none | black | Value of 0. Represents no piece. |
 | white | black | Value of 1. Represents a white piece. |
+
+
+## GameResult (enum)
+| Type | Definition | Notes |
+| --- | --- | --- |
+| GameResult | inProgress | The game is still going. |
+| GameResult | inconclusive | The game is inconclusive. |
+| GameResult | draw | The game is a draw. Neither side wins. |
+| GameResult | whiteWin | White wins. |
+| GameResult | blackWin | Black wins. |
 
 
 ## Timer (class)
