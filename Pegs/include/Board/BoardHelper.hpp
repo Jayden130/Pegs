@@ -21,8 +21,8 @@ constexpr uint64_t notDFile = ~FileD;
 constexpr uint64_t innerFileMask = notAFile & notDFile;
 constexpr uint64_t outerFileMask = ~innerFileMask;
 
-constexpr uint64_t LightSquares = 0x555555;
-constexpr uint64_t DarkSquares = 0xAAAAAA;
+constexpr uint64_t LightSquares = 0xAAAAAA;
+constexpr uint64_t DarkSquares = 0x555555;
 
 int PopLSB(uint64_t& value);
 int GetLSB(uint64_t& value);
@@ -33,5 +33,6 @@ void ToggleSquares(uint64_t& bitboard, int squareA, int squareB);
 bool SquareIsSet(uint64_t bitboard, int squareIndex);
 bool ValidSquare(int x, int y);
 bool ValidSquare(int x, int y, int& index);
+int GetSquareIndex(int x, int y);
 int FileIndex(int squareIndex);
 int RankIndex(int squareIndex);

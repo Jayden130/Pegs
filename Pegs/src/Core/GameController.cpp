@@ -2,7 +2,6 @@
 #include "Board/Board.hpp"
 #include "Board/BoardHelper.hpp"
 
-#include "Core/Timer.hpp"
 #include "Core/Clock.hpp"
 #include "Core/IBot.hpp"
 #include "Core/GameController.hpp"
@@ -11,79 +10,81 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
 {
     int moveCount = 1;
 
-    Clock clock;
+    this->board = &board;
     clock.Start(startingSeconds * 1000, board.turn == Piece::white);
 
     while (board.GetGameResult() == GameResult::inProgress)
     {
-        std::cout << std::endl;
+        Move move;
 
         if (board.turn == Piece::white)
         {
-            Board botBoard(board);
-            Move move = whiteBot.Think(botBoard, clock.GetWhiteTimer());
-            
-            if (!IsLegalMove(move, board))
-            {
-                std::cout << "White played an illegal move! Stopping game...\n";
-                std::cout << "Attempted move: " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
-                break;
-            }
-            board.MakeMove(move);
-            clock.Turn();
+            move = MakeMove(whiteBot);
 
-            if (clock.WhiteMillisecondsRemaining == 0)
+            if (!move.IsEmpty())
             {
-                std::cout << "White ran out of time! Stopping game...\n";
-                std::cout << "Attempted move: " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
-                break;
+                std::cout << moveCount++ << ". " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
             }
-
-            std::cout << moveCount << ". " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture());
+            else break;
         }
 
         if (board.GetGameResult() != GameResult::inProgress) break;
 
-        Board botBoard(board);
-        Move move = blackBot.Think(botBoard, clock.GetBlackTimer());
-
-        if (!IsLegalMove(move, board))
+        if (board.turn == Piece::black)
         {
-            std::cout << "Black played an illegal move! Stopping game...\n";
-            std::cout << "Attempted move: " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
-            break;
-        }
-        board.MakeMove(move);
-        clock.Turn();
+            move = MakeMove(blackBot);
 
-        if (clock.BlackMillisecondsRemaining == 0)
-        {
-            std::cout << "Black ran out of time! Stopping game...\n";
-            std::cout << "Attempted move: " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
-            break;
+            if (!move.IsEmpty())
+            {
+                std::cout << moveCount++ << ". " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
+            }
+            else break;
         }
 
-        std::cout << " " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture());
-
-        moveCount++;
+        if (board.GetGameResult() != GameResult::inProgress) break;
     }
 
     GameResult result = board.GetGameResult();
     if (result == GameResult::whiteWin || result == GameResult::blackWin)
-    {
         std::cout << "#\n";
-    }
-    if (result == GameResult::inProgress) result = GameResult::inconclusive;
+
+    else if (result == GameResult::inProgress) result = board.turn == Piece::white ? GameResult::blackWin : GameResult::whiteWin;
 
     std::cout << std::endl << GetResultString(result);
 }
 
-bool GameController::IsLegalMove(Move move, Board& board)
+Move GameController::MakeMove(IBot& bot)
 {
-    bool isWhiteToMove = board.turn == Piece::white;
-    const uint64_t friendlyPieces = board.bitboards[!isWhiteToMove];
-    const uint64_t enemyPieces = board.bitboards[isWhiteToMove];
-    const uint64_t pieces = board.bitboards[2];
+    Board botBoard(*board);
+    Move move = bot.Think(botBoard, clock.GetWhiteTimer());
+
+    if (!IsLegalMove(move))
+    {
+        std::cout << "Bot tried to play an illegal move! Stopping game...\n";
+        std::cout << "Attempted move: " << ToNotation(move.GetStartSquare(), move.GetTargetSquare(), move.GetCapture()) << std::endl;
+        return Move();
+    }
+
+    clock.Turn();
+
+    // Time is only checked after the bot has thought. This is to keep everything on one thread
+    if (!clock.isWhiteToMove ? clock.WhiteMillisecondsRemaining == 0 : clock.BlackMillisecondsRemaining == 0)
+    {
+        std::cout << "Bot ran out of time! Stopping game...\n";
+        return Move();
+    }
+
+    board->MakeMove(move);
+
+    return move;
+}
+
+bool GameController::IsLegalMove(Move move) const
+{
+    bool isWhiteToMove = board->turn == Piece::white;
+    const uint64_t friendlyPieces = board->bitboards[!isWhiteToMove];
+    const uint64_t enemyPieces = board->bitboards[isWhiteToMove];
+    const uint64_t pieces = board->bitboards[2];
     const uint64_t legalMask = ~pieces;
     
     int startSquare = move.GetStartSquare();
@@ -125,14 +126,14 @@ bool GameController::IsLegalMove(Move move, Board& board)
     else
     {
         // Check if move is a legal move
-        if (absDir != 1 && direction != 4 * board.turn)
+        if (absDir != 1 && direction != 4 * board->turn)
         {
             // Check if move is a legal skipping move
-            if (SquareIsSet(pieces, startSquare + 4 / board.turn))
+            if (SquareIsSet(pieces, startSquare + 4 / board->turn))
             {
-                if (direction == 3 * board.turn || direction == 5 * board.turn)
+                if (direction == 3 * board->turn || direction == 5 * board->turn)
                 {
-                    if (RankIndex(targetSquare) - RankIndex(startSquare) == board.turn)
+                    if (RankIndex(targetSquare) - RankIndex(startSquare) == board->turn)
                         return true;
                 }
             }
@@ -164,7 +165,7 @@ std::string GameController::GetResultString(GameResult result)
     case GameResult::draw:
         return "Draw";
     default:
-        return "Inconclusive";
+        return "inProgress";
     }
 }
 

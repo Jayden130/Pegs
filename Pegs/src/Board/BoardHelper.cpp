@@ -46,8 +46,12 @@ bool ValidSquare(int x, int y)
 }
 bool ValidSquare(int x, int y, int& index)
 {
-	index = y * 4 + x;
+	index = GetSquareIndex(x, y);
 	return x >= 0 && x < 4 && y >= 0 && y < 6;
+}
+int GetSquareIndex(int x, int y)
+{
+	return y * x + x;
 }
 
 int FileIndex(int squareIndex)
