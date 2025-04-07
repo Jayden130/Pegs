@@ -51,7 +51,7 @@ bool ValidSquare(int x, int y, int& index)
 }
 int GetSquareIndex(int x, int y)
 {
-	return y * x + x;
+	return y * 4 + x;
 }
 
 int FileIndex(int squareIndex)
