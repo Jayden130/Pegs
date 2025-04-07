@@ -131,6 +131,7 @@ White always begins first.
 | bool | SquareIsSet(uint64_t bitboard, int squareIndex) | Returns true if the given square is set to 1 on the bitboard, otherwise false. |
 | bool | ValidSquare(int x, int y) | Returns true if given x and y is not out of bounds, otherwise false. |
 | bool | ValidSquare(int x, int y, int& index) | Returns true if given x and y is not out of bounds, otherwise false. Also outputs the index of the square on x and y |
+| int | GetSquareIndex(int x, int y) | Returns the square index of file and rank. |
 | int | FileIndex(int squareIndex) | Returns the file of the given square index. Starts at 1. |
 | int | RankIndex(int squareIndex) | Returns the rank of the given square index. Starts at 1. |
 
