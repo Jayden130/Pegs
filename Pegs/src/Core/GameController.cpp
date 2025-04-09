@@ -18,7 +18,6 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
 
     sf::RenderWindow window(sf::VideoMode({ 256, 384 }), "SFML works!");
     std::thread thread(Renderer::newThread, std::ref(window));
-    Renderer::updateBoard(board, window);
 
     while (board.GetGameResult() == GameResult::inProgress)
     {
@@ -26,7 +25,7 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
 
         if (board.turn == Piece::white)
         {
-            move = MakeMove(whiteBot);
+            move = MakeMove(whiteBot, window);
 
             if (!move.IsEmpty())
             {
@@ -39,7 +38,7 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
 
         if (board.turn == Piece::black)
         {
-            move = MakeMove(blackBot);
+            move = MakeMove(blackBot, window);
 
             if (!move.IsEmpty())
             {
@@ -60,9 +59,10 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
     std::cout << std::endl << GetResultString(result);
 }
 
-Move GameController::MakeMove(IBot& bot)
+Move GameController::MakeMove(IBot& bot, sf::RenderWindow& window)
 {
     Board botBoard(*board);
+    Renderer::updateBoard(botBoard, window);
     Move move = bot.Think(botBoard, clock.GetWhiteTimer());
 
     if (!IsLegalMove(move))

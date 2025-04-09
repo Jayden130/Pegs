@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "Core/Clock.hpp"
 #include "Core/IBot.hpp"
 
@@ -10,7 +12,7 @@ public:
 	Board* board;
 
 private:
-	Move MakeMove(IBot& bot);
+	Move MakeMove(IBot& bot, sf::RenderWindow& window);
 	bool IsLegalMove(Move move) const;
 	std::string ToNotation(int startSquare, int targetSquare, int captureSquare);
 	std::string GetResultString(GameResult result);
