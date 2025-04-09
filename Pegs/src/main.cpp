@@ -9,13 +9,10 @@
 #include "My Bot/MyBot.hpp"
 #include "Human Bot/HumanBot.hpp"
 
-#include "Core/Renderer.hpp"
 #include "Core/GameController.hpp"
 
 int main()
 {
-    std::thread renderer(Renderer::main);
-
     std::cout << "Fen: ";
     std::string fen;
     std::getline(std::cin, fen);
@@ -26,8 +23,8 @@ int main()
     }
     Board board(fen);
     
-    MyBot whiteBot;
-    MyBot blackBot;
+    HumanBot whiteBot;
+    HumanBot blackBot;
 
     GameController controller;
 

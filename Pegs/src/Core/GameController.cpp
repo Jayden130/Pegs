@@ -1,10 +1,13 @@
 #include <iostream>
+#include <thread>
+
 #include "Board/Board.hpp"
 #include "Board/BoardHelper.hpp"
 
 #include "Core/Clock.hpp"
 #include "Core/IBot.hpp"
 #include "Core/GameController.hpp"
+#include "Core/Renderer.hpp"
 
 void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, const long long startingSeconds)
 {
@@ -16,6 +19,11 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
     while (board.GetGameResult() == GameResult::inProgress)
     {
         Move move;
+
+        sf::RenderWindow window(sf::VideoMode({ 256, 384 }), "SFML works!");
+        std::thread thread(Renderer::newThread, std::ref(window));
+        Renderer::updateBoard(board, window);
+
 
         if (board.turn == Piece::white)
         {

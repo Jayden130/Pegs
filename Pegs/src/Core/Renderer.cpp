@@ -1,26 +1,26 @@
 #include <SFML/Graphics.hpp>
+
+#include <Board/Board.hpp>
 #include "Core/Renderer.hpp"
 
-void Renderer::main() {
-    sf::RenderWindow window(sf::VideoMode({ 256, 384 }), "SFML works!");
-    sf::CircleShape shape(100.0f);
-    shape.setFillColor(sf::Color::Green);
 
-    while (window.isOpen()) {
-        while (const std::optional event = window.pollEvent()) {
-            if (event->is<sf::Event::Closed>()) {
-                (void)window.close();
-            }
-            else if (auto* resized = event->getIf<sf::Event::Resized>()) {
-                Renderer::resizeKeepRatios(window, resized);
-            }
+sf::Texture whitePegTex("pawn_white.png", false, sf::IntRect({ 0, 0 }, { 64, 64 }));
+sf::Texture blackPegTex("pawn_black.png", false, sf::IntRect({ 0, 0 }, { 64, 64 }));
+
+
+void Renderer::newThread(sf::RenderWindow& window) {
+    whitePegTex.setSmooth(true);
+    blackPegTex.setSmooth(true);
+
+    Renderer::drawBackground(window);
+    window.display();
+
+    while (const std::optional event = window.pollEvent()) {
+        if (event->is<sf::Event::Closed>()) {
+            window.close();
+        } else if (auto* resized = event->getIf<sf::Event::Resized>()) {
+            Renderer::resizeKeepRatios(resized, window);
         }
-
-        window.clear();
-
-        Renderer::drawBackground(window);
-
-        window.display();
     }
 }
 
@@ -42,9 +42,53 @@ void Renderer::drawBackground(sf::RenderWindow& window) {
     }
 }
 
+void Renderer::updateBoard(Board& board, sf::RenderWindow& window) {
+    window.clear();
+    Renderer::drawBackground(window);
+    Renderer::renderPawns(window, board, 0);
+    Renderer::renderPawns(window, board, 1);
+
+    window.display();
+}
+
+void Renderer::renderPawns(sf::RenderWindow& window, Board& board, short index) {
+    sf::Texture texture;
+    if (index == 0) { 
+        texture = whitePegTex;
+    } 
+    else if (index == 1) {
+        texture = blackPegTex;
+    }
 
 
-void Renderer::resizeKeepRatios(sf::RenderWindow& window, const sf::Event::Resized* resized) {
+    uint64_t x = static_cast<uint64_t>(board.bitboards[0]);
+    int column = 0;
+    int row = 0;
+    while (x != 0) {
+        if (row == 6) {
+            break;
+        }
+
+        sf::Sprite sprite(texture);
+        sprite.setPosition({ column * 64.f, row * 64.f });
+
+        uint64_t bit = x & 1;
+        if (bit == 1) {
+            window.draw(sprite);
+        }
+
+        if (column == 3) {
+            row++;
+            column = 0;
+        } else {
+            column++;
+        }
+
+        x >>= 1;
+    }
+}
+
+void Renderer::resizeKeepRatios(const sf::Event::Resized* resized, sf::RenderWindow& window) {
     sf::View view = window.getDefaultView();
 
     sf::Vector2f newSize = (sf::Vector2f)resized->size;
