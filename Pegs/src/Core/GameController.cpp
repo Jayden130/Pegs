@@ -16,14 +16,13 @@ void GameController::StartGame(IBot& whiteBot, IBot& blackBot, Board& board, con
     this->board = &board;
     clock.Start(startingSeconds * 1000, board.turn == Piece::white);
 
+    sf::RenderWindow window(sf::VideoMode({ 256, 384 }), "SFML works!");
+    std::thread thread(Renderer::newThread, std::ref(window));
+    Renderer::updateBoard(board, window);
+
     while (board.GetGameResult() == GameResult::inProgress)
     {
         Move move;
-
-        sf::RenderWindow window(sf::VideoMode({ 256, 384 }), "SFML works!");
-        std::thread thread(Renderer::newThread, std::ref(window));
-        Renderer::updateBoard(board, window);
-
 
         if (board.turn == Piece::white)
         {
